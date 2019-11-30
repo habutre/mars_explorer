@@ -1,0 +1,38 @@
+# intermediate image (build app)
+FROM elixir:1.9-alpine AS builder-step
+
+WORKDIR .
+
+COPY . .
+
+RUN mix local.hex --if-missing --force
+
+RUN mix escript.install hex ex_doc --force
+
+RUN mix do deps.get, deps.compile
+
+RUN mix do clean, compile && mix test
+
+RUN MIX_ENV=prod mix compile && \
+      ~/.mix/escripts/ex_doc "MarsExplorer" "0.1.0" \
+      _build/prod/lib/mars_explorer/ebin \
+      -m "MarsExplorer" \
+      -u "https://git.acme.com/company/mars_explorer"
+
+RUN MIX_ENV=prod mix escript.build
+
+# final built image (deploy app)
+FROM nginx:1.17-alpine AS package-step
+
+RUN apk update && apk add erlang erlang-inets erlang-runtime-tools 
+
+# Set exposed ports
+EXPOSE 80
+ENV PORT=80
+
+COPY --from=builder-step doc /usr/share/nginx/html
+COPY --from=builder-step mars_explorer /app/mars_explorer
+COPY --from=builder-step start.sh /app/start.sh
+
+ENTRYPOINT ["app/start.sh"]
+
