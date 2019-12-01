@@ -15,7 +15,7 @@ defmodule MarsExplorer.MeshTest do
   end
 
   describe "boundary/0" do
-    test "retrieve initial mesh's boundary", %{mesh: mesh} do
+    test "retrieve initial mesh's boundary" do
       assert MarsExplorer.Mesh.boundary() == %MarsExplorer.Mesh{lon: nil, lat: nil}
     end
   end

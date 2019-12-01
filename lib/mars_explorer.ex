@@ -2,13 +2,12 @@
 defmodule MarsExplorer do
   require Logger
 
-  defstruct [:lon, :lat, :direction, :boundary]
+  defstruct [:lon, :lat, :direction]
 
   @type t :: %__MODULE__{
           lon: integer(),
           lat: integer(),
-          direction: String.t(),
-          boundary: {integer(), integer()}
+          direction: String.t()
         }
 
   @moduledoc """

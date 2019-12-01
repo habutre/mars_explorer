@@ -40,12 +40,12 @@ defmodule MarsExplorer.CommandProcessor do
   end
 
   defp can_move?(state) do
-    {lon_boundary, lat_boundary} = state.boundary
+    boundary = MarsExplorer.Mesh.boundary()
 
     cond do
-      "N" == state.direction && state.lat == lat_boundary -> false
+      "N" == state.direction && state.lat == boundary.lat -> false
       "S" == state.direction && state.lat == 0 -> false
-      "E" == state.direction && state.lon == lon_boundary -> false
+      "E" == state.direction && state.lon == boundary.lon -> false
       "W" == state.direction && state.lon == 0 -> false
       true -> true
     end
