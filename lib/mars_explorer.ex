@@ -2,9 +2,14 @@
 defmodule MarsExplorer do
   require Logger
 
-  defstruct [:lon, :lat, :direction]
+  defstruct [:lon, :lat, :direction, :boundary]
 
-  @type t :: %__MODULE__{lon: integer(), lat: integer(), direction: String.t()}
+  @type t :: %__MODULE__{
+          lon: integer(),
+          lat: integer(),
+          direction: String.t(),
+          boundary: {integer(), integer()}
+        }
 
   @moduledoc """
   MarsExplorer is a explorer controller that process commands received as stimulus and instruct the engines to which direction moves
