@@ -34,7 +34,7 @@ defmodule MarsExplorer.CommandProcessorTest do
       assert expected_state == CommandProcessor.process(position, commands)
     end
 
-    test "applying RMLMMM against positioin 2 2 S should never cross boundaries resulting 0 0 W" do
+    test "should never cross boundaries resulting 0 0 W" do
       position = %MarsExplorer{lon: 2, lat: 2, direction: "S"}
       commands = ["R", "M", "L", "M", "M", "M", "R", "M"]
       expected_state = {:ok, %MarsExplorer{lon: 0, lat: 0, direction: "W"}}
@@ -42,7 +42,7 @@ defmodule MarsExplorer.CommandProcessorTest do
       assert expected_state == CommandProcessor.process(position, commands)
     end
 
-    test "applying RMLMMM against positioin 2 2 S, unknown commands should be ignored" do
+    test "unknown commands should be ignored" do
       position = %MarsExplorer{lon: 2, lat: 2, direction: "S"}
       commands = ["Y", "R", "M", "L", "M", "A", "M", "M", "R", "M", "Z"]
       expected_state = {:ok, %MarsExplorer{lon: 0, lat: 0, direction: "W"}}
