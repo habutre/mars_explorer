@@ -18,7 +18,7 @@ defmodule MarsExplorer.MeshTest do
   describe "boundary/0" do
     test "retrieve mesh's boundary" do
       boundary = MarsExplorer.Mesh.boundary()
-      assert  {nil, nil} = boundary
+      assert {nil, nil} = boundary
     end
   end
 

@@ -2,6 +2,13 @@
 defmodule MarsExplorer.CommandProcessor do
   require Logger
 
+  @moduledoc """
+  Executes all commands sent to Explorer. In other words is the explorer controller
+  """
+
+  @doc """
+  Executes movements and direction of Explorer and controls the boundaries to avoid accidents and control resources used on exploration
+  """
   @spec process(MarsExplorer.t(), list(String.t())) ::
           {:ok, MarsExplorer.t()} | {:error, String.t()}
   def process(state, commands) when is_list(commands) do
