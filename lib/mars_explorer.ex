@@ -21,6 +21,7 @@ defmodule MarsExplorer do
 
   @doc """
   Main function responsible to be the entrypoint of App
+  No args are expected since the STDIN will be read to start the flow
   """
   def main(_args \\ []) do
     MarsExplorer.Mesh.start()
